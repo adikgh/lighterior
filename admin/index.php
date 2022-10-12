@@ -1,0 +1,1 @@
+<? header('location: https://admin.lighterior.kz/');

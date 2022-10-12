@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>Сайт разрабатывается</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Digital Countdown Timer Widget Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- // for-mobile-apps -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/timeTo.css" type="text/css" rel="stylesheet"/>
+	<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<script src="js/jquery.min.js"></script> 
+</head>
+<body>
+	<div class="main">
+		<h1>Сайт разрабатывается</h1>
+		<pre>$('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
+		<div id="countdown-2"></div>
+		<div class="w3layouts_hours_grids">
+			<div class="w3layouts_hours_grid_left">
+				<p class="agileits_w3layouts_para">День</p>
+			</div>
+			<div class="w3layouts_hours_grid_left_w3">
+				<p class="agile_para">Час</p>
+			</div>
+			<div class="w3layouts_hours_grid_left_w3l">
+				<p class="w3_agile_para">Минут</p>
+			</div>
+			<div class="w3layouts_hours_grid_left_w3ls">
+				<p class="w3layouts_para">Секунд</p>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<!-- <div class="agileits_newsletter">
+			<h2>Subscribe Now</h2>
+			<form action="#" method="post" class="agileinfo">
+				<input class="wthree" type="email" name="email" placeholder="Please enter your email" required="">
+				<input class="w3_agileits" type="submit" value="Subscribe">
+			</form>
+		</div> -->
+		<!-- <div class="agileits_copyright">
+			<p>© Lighterior, 2022</p>
+		</div> -->
+		<script src="js/jquery.timeTo.js"></script> 
+		<script>
+				var date = getRelativeDate(20);
+				document.getElementById('date-str').innerHTML = date.toString();
+				$('#countdown-2').timeTo(date);
+				function getRelativeDate(days, hours, minutes){
+					var date = new Date(Date.now() + 60000 * 60 * 24 * days);
+					date.setHours(hours || 0);
+					date.setMinutes(minutes || 0);
+					date.setSeconds(0);
+					return date;
+				}
+		</script>
+	</div>
+</body>
+</html>
