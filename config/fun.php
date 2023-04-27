@@ -38,6 +38,18 @@ class fun {
 		if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
 	}
 
+
+	// user_designer
+	public static function user_designer($id) {
+		$sql = db::query("select * from user_designer where user_id = '$id'");
+		if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
+	}
+	public static function user_designer_partners($id) {
+		$sql = db::query("select * from user_designer_partners where id = '$id'");
+		if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
+	}
+
+
 	// autor
 	// public static function autor($id) {
 	// 	$sql = db::query("select * from u_autor where id = '$id'");

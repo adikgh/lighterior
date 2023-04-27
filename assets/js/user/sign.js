@@ -41,76 +41,34 @@ $(document).ready(function() {
 
 		// form
 		btn = $(this)
-		phone = $('.phone')
-		code = $('.code')
 		sname = $('.name')
+		surname = $('.surname')
+		phone = $('.phone')
 		password = $('.password')
 
 		// 
-		if (btn.attr('data-type') == 'phone') {
-			if (phone.attr('data-sel') != 1) mess('Cіз телефен номеріңізді жазбапсыз')
-			else {
-				$.ajax({
-					url: "/user/get.php?sign_up_phone",
-					type: "POST",
-					dataType: "html",
-					data: ({ phone: phone.attr('data-val') }),
-					success: function(data){
-						if (data == 'phone') mess('Cіз базада тіркелмегенсіз, админмен байланысып көріңіз!')
-						else if (data == 'password') mess('Cіз платформаға туркелгенсіз. <a href="sign_in.php">Кіру</a>')
-						else if (data == 'code') {
-							phone.attr('disabled', 'true')
-							code.parent().removeClass('dsp_n')
-							btn.attr('data-type', 'code')
-						} else console.log(data)
-					},
-					beforeSend: function(){},
-					error: function(data){console.log(data)}
-				})
-			}
-		} else if (btn.attr('data-type') == 'code') {
-			if (code.attr('data-sel') != 1) mess('Cіз сандарды жазбапсыз')
-			else {
-				$.ajax({
-					url: "/user/get.php?sign_up_code",
-					type: "POST",
-					dataType: "html",
-					data: ({
-						phone: phone.attr('data-val'),
-						code: code.attr('data-val')
-					}),
-					success: function(data){
-						if (data == 'yes') {
-							code.attr('disabled', 'true')
-							sname.parent().removeClass('dsp_n')
-							password.parent().removeClass('dsp_n')
-							btn.attr('data-type', 'final')
-						} else if (data == 'none') mess('Cіз жазған код қате, қайта жазып көріңіз')
-						else console.log(data)
-					},
-					beforeSend: function(){},
-					error: function(data){console.log(data)}
-				})
-			}
-		} else if (btn.attr('data-type') == 'final') {
-			if (sname.attr('data-sel') != 1 || password.attr('data-sel') != 1) mess('Форманы толық толтырыңыз')
-			else {
-				$.ajax({
-					url: "/user/get.php?sign_up_final",
-					type: "POST",
-					dataType: "html",
-					data: ({
-						name: sname.attr('data-val'),
-						password: password.attr('data-val')
-					}),
-					success: function(data){
-						if (data == 'yes') location.reload();
-						else console.log(data)
-					},
-					beforeSend: function(){},
-					error: function(data){console.log(data)}
-				})
-			}
+		if (phone.attr('data-sel') != 1 || password.attr('data-sel') != 1) {
+			if (phone.attr('data-sel') != 1) mess('Вы не написали свой номер телефона')
+			else if (password.attr('data-sel') != 1) mess('Вы не ввели пароль')
+		} else {
+			$.ajax({
+				url: "/user/get.php?sign_up",
+				type: "POST",
+				dataType: "html",
+				data: ({ 
+					name: sname.attr('data-val'),
+					surname: surname.attr('data-val'),
+					phone: phone.attr('data-val'),
+					password: password.attr('data-val'),
+				}),
+				beforeSend: function(){ },
+				success: function(data){
+					if (data == 'phone') mess('Вы уже зарегистрированы')
+					else if (data == 'yes') location.reload();
+					else console.log(data)
+				},
+				error: function(data){ console.log(data) }
+			})
 		}
 	});
 

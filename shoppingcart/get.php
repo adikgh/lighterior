@@ -64,6 +64,9 @@
 		$phone = strip_tags($_POST['phone']);
 		$delivery_method = strip_tags($_POST['delivery_method']);
 		$payment_method = strip_tags($_POST['payment_method']);
+
+		$delivery_method = 0;
+		$payment_method = 0;
 		
 		$id = (mysqli_fetch_assoc(db::query("SELECT max(id) FROM `on_orders`")))['max(id)'] + 1;
       $ins = db::query("INSERT INTO `on_orders`(`id`, `delivery_method`, `payment_method`, `sum`) VALUES ('$id', '$delivery_method', '$payment_method', '$sum')");

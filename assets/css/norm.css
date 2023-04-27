@@ -551,6 +551,16 @@ smail{font-size:14px}
 	background: var(--cl8);
 }
 
+.btn_ddb{
+	background: var(--bl);
+	color: var(--wh);
+	border: 0;
+}
+.btn_ddb:hover{
+	color: var(--wh);
+	background: var(--bl8);
+}
+
 
 .btn_dd_54{ 
 	min-height: 54px;
@@ -2306,4 +2316,41 @@ textarea.form_txt{
 		bottom: 20px;
 		right: 20px;
 	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
+.up_site{
+	position: fixed;
+	z-index: 999;
+	bottom: 15px;
+	left: 15px;
+	width: 44px;
+	height: 44px;
+	background: var(--wh);
+	border-radius: 8px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid var(--gr2);
+	cursor: pointer;
 }

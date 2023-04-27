@@ -5,7 +5,7 @@
 	// else header('location: /user/acc');
 
 	// site setting
-	$menu_name = 'count_friends';
+	$menu_name = 'disigner_finance';
 
 	$css = ['user/main'];
 	$js = ['user/main'];
@@ -14,13 +14,6 @@
 
 	<div class="user">
 
-		<!-- <div class="bl_c">
-			<div class="multis">
-				<a class="multis_i" href="/user/">Профиль</a>
-				<span class="multis_i">Заказы</span>
-			</div>
-		</div> -->
-
 		<div class="bl_c">
 			<div class="user_p">
 
@@ -28,7 +21,9 @@
 
 				<div class="user_sn">
 
-					<? include "../umenu2.php"; ?>
+					<div class="head_c head_c1">
+						<h4>Финансы и бонусы</h4>
+					</div>
 
 					<div class="">
 

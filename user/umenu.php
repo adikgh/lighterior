@@ -1,5 +1,5 @@
 <div class="user_pl ph_none">
-   <? if ($counterparties): ?>
+   <? if ($designer): ?>
       <div class="up_lt">
          <span>Основной</span>
          <a class="up_li <?=($menu_name=='orders'?'user_pli_act':'')?>" href="/user/orders/">
@@ -26,17 +26,17 @@
          </a>
       </div>
       <div class="up_lt">
-         <span>Контрагент</span>
-         <a class="up_li <?=($menu_name=='counterparties'?'user_pli_act':'')?>" href="/user/counterparties/">
+         <span>Дизайнеры</span>
+         <a class="up_li <?=($menu_name=='disigner'?'user_pli_act':'')?>" href="/user/disigner/">
+            <div class="menu_cin"><i class="fal fa-users"></i></div>
+            <div class="menu_cih">Друзья и их заказ</div>
+         </a>
+         <a class="up_li <?=($menu_name=='disigner_finance'?'user_pli_act':'')?>" href="/user/disigner/finance/">
             <div class="menu_cin"><i class="fal fa-sack-dollar"></i></div>
             <div class="menu_cih">Финансы и бонусы</div>	
          </a>
          <!-- <a class="user_pli" href="/user/">Баланс и история операций</a> -->
-         <a class="up_li <?=($menu_name=='count_friends'?'user_pli_act':'')?>" href="/user/counterparties/friends/">
-            <div class="menu_cin"><i class="fal fa-users"></i></div>
-            <div class="menu_cih">Друзья и их заказ</div>
-         </a>
-         <a class="up_li" href="/user/counterparties/invite_friends.php">
+         <a class="up_li" href="/user/disigner/invite_friends.php">
             <div class="menu_cin"><i class="fal fa-user-plus"></i></div>
             <div class="menu_cih">Пригласить друзей</div>
          </a>

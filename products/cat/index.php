@@ -1,4 +1,4 @@
-<?php include "../../config/core.php";
+<? include "../../config/core.php";
 
 
 
@@ -6,9 +6,9 @@
 
 
 	// filter
-	if ($_GET['on'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id'");
-	elseif ($_GET['off'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id'");
-	else $product_all = db::query("select * from product where catalog_id = '$cat_id'");
+	if ($_GET['on'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0");
+	elseif ($_GET['off'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0");
+	else $product_all = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0");
 	$page_result = mysqli_num_rows($product_all);
 
 	// page number
@@ -20,9 +20,9 @@
 	$number = $page_start;
 
 	// filter
-	if ($_GET['on'] == 1) $product = db::query("select * from product where catalog_id = '$cat_id' order by ins_dt desc limit $page_start, $page_age");
-	elseif ($_GET['off'] == 1) $product = db::query("select * from product where catalog_id = '$cat_id' order by ins_dt desc limit $page_start, $page_age");
-	else $product = db::query("select * from product where catalog_id = '$cat_id' order by ins_dt desc limit $page_start, $page_age");
+	if ($_GET['on'] == 1) $product = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0 order by ins_dt desc limit $page_start, $page_age");
+	elseif ($_GET['off'] == 1) $product = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0 order by ins_dt desc limit $page_start, $page_age");
+	else $product = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0 order by ins_dt desc limit $page_start, $page_age");
 
 
 
@@ -133,8 +133,8 @@
 								<a href="../item/?id=<?=$item_d['id']?>">
 									<div class="item_img">
 										<? if ($item_d['img'] || $item_d['img_room']): ?>
-											<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$item_d['img']?>"></div>
-											<? if ($item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$item_d['img_room']?>"></div> <? endif ?>
+											<div class="item_img_c lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$item_d['img']?>"></div>
+											<? if ($item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$item_d['img_room']?>"></div> <? endif ?>
 										<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
 									</div>
 								</a>
@@ -173,8 +173,9 @@
 									<div class="item_others_c">
 										<? while ($pr_item_d = mysqli_fetch_array($pr_item)): ?>
 											<? if ($i <= 6): ?>
-												<a class="item_others_i <?=($i==1?'item_others_act':'')?>" href="item/?id=<?=$pr_item_d['id']?>">
-													<div class="lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+												<a class="item_others_i <?=($i==1?'item_others_act':'')?>" href="../item/?id=<?=$pr_item_d['id']?>">
+													<? if ($pr_item_d['img']): ?> <div class="lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+													<? else: ?> <i class="fal fa-box"></i> <? endif ?>
 												</a>
 											<? endif; $i++; ?>
 										<? endwhile ?>
@@ -188,25 +189,29 @@
 					
 				</div>
 
-				<? if ($page_all > 1): ?>
+				<div class="bl23_csb">
+					<div class="btn btn_show_prd" data-id="<?=$cat_id?>" data-start="<?=$page_age+1?>" data-clc="1">Загрузить еще</div>
+				</div>
+
+				<!-- <? if ($page_all > 1): ?>
 					<div class="uc_p">
-						<? if ($page > 1): ?> <a class="uc_pi" href="<?=$url?>?page=<?=$page-1?>"><i class="fal fa-angle-left"></i></a> <? endif ?>
-						<a class="uc_pi <?=($page==1?'uc_pi_act':'')?>" href="<?=$url?>?page=1">1</a>
+						<? if ($page > 1): ?> <a class="uc_pi" href="<?=$url.'?id='.$cat_id?>&page=<?=$page-1?>"><i class="fal fa-angle-left"></i></a> <? endif ?>
+						<a class="uc_pi <?=($page==1?'uc_pi_act':'')?>" href="<?=$url.'?id='.$cat_id?>&page=1">1</a>
 						<? for ($pg = 2; $pg < $page_all; $pg++): ?>
 							<? if ($pg == $page - 1): ?>
 								<? if ($page - 1 != 2): ?> <div class="uc_pi uc_pi_disp">...</div> <? endif ?>
-								<a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url?>?page=<?=$pg?>"><?=$pg?></a>
+								<a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url.'?id='.$cat_id?>&page=<?=$pg?>"><?=$pg?></a>
 							<? endif ?>
-							<? if ($pg == $page): ?> <a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url?>?page=<?=$pg?>"><?=$pg?></a> <? endif ?>
+							<? if ($pg == $page): ?> <a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url.'?id='.$cat_id?>&page=<?=$pg?>"><?=$pg?></a> <? endif ?>
 							<? if ($pg == $page + 1): ?>
-								<a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url?>?page=<?=$pg?>"><?=$pg?></a>
+								<a class="uc_pi <?=($page==$pg?'uc_pi_act':'')?>" href="<?=$url.'?id='.$cat_id?>&page=<?=$pg?>"><?=$pg?></a>
 								<? if ($page + 1 != $page_all - 1): ?> <div class="uc_pi uc_pi_disp">...</div> <? endif ?>
 							<? endif ?>
 						<? endfor ?>
-						<a class="uc_pi <?=($page==$page_all?'uc_pi_act':'')?>" href="<?=$url?>?page=<?=$page_all?>"><?=$page_all?></a>
-						<? if ($page < $page_all): ?> <a class="uc_pi" href="<?=$url?>?page=<?=$page+1?>"><i class="fal fa-angle-right"></i></a> <? endif ?>
+						<a class="uc_pi <?=($page==$page_all?'uc_pi_act':'')?>" href="<?=$url.'?id='.$cat_id?>&page=<?=$page_all?>"><?=$page_all?></a>
+						<? if ($page < $page_all): ?> <a class="uc_pi" href="<?=$url.'?id='.$cat_id?>&page=<?=$page+1?>"><i class="fal fa-angle-right"></i></a> <? endif ?>
 					</div>
-				<? endif ?>
+				<? endif ?> -->
 
 			</div>
 		</div>

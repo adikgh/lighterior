@@ -149,3 +149,15 @@
 	</div>
 
 <? include "../../block/footer.php"; ?>
+
+	<script>
+		// 
+		var swiper_bl23 = new Swiper(".swiper_bl23", {
+			slidesPerView: "auto",
+			// navigation: {
+			// 	nextEl: ".swiper_next_bl23",
+			// 	prevEl: ".swiper_prev_bl23",
+			// },
+		});
+	</script>
+

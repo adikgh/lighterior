@@ -1,6 +1,9 @@
 <!--  -->
 <div class="bl_mess"><div class="bl_mess_sam"></div></div>
 
+<!--  -->
+<a href="#top" class="up_site" ><i class="fal fa-angle-up"></i></a>
+
 <!-- block form -->
 <? if ($site_set['form'] == true): ?>
    <div class="pop_bl fr">

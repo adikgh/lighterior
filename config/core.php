@@ -42,13 +42,13 @@
 
             if (mysqli_num_rows($user)) {
                $user_data = mysqli_fetch_assoc($user);
-               if ($user_ps == $user_data['password']) {
+               if ($user_ps == $user_data['password2']) {
                   self::$user_ph = $user_ph;
                   self::$user_data = $user_data;
                } else $this->user_unset();
             } elseif (mysqli_num_rows($user2)) { 
                $user_data = mysqli_fetch_assoc($user2);
-               if ($user_ps == $user_data['password']) {
+               if ($user_ps == $user_data['password2']) {
                   self::$user_pm = $user_pm;
                   self::$user_data = $user_data;
                } else $this->user_unset();
@@ -76,7 +76,7 @@
    $core = new core;
    $user = core::$user_data;
    $user_id = $user['id'];
-   $counterparties = $user['counterparties'];
+   $designer = $user['designer'];
    $user_right = $user['right'];
    $user_super_right = $user['super_right'];
 
@@ -88,7 +88,7 @@
 
 
    // setting
-   $ver = 5.001;
+   $ver = 5.0063;
    $site = mysqli_fetch_array(db::query("select * from `site` where id = 1"));
    $site_set = [
       'header' => true,

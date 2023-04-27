@@ -9,15 +9,75 @@
    <div class="menuc">
       <div class="menuc_a menu_back"></div>
       <div class="menuc_c">
-         <div class="menuc_cb">
-            <div class="btn btn_dd2 menu_back"><i class="fal fa-times"></i></div>
+         <div class="menuc_ct">
+            <div class="menuc_ctc">
+               <div class="menuc_cb">
+                  <div class="btn btn_dd2 menu_back"><i class="fal fa-times"></i></div>
+               </div>
+               <span><?=$site['name']?></span>
+            </div>
+         </div>
+         <div class="menuc_cw">
+            <div class="menuc_cwc">
+               <div class="menuc_cwi menuc_cwi_act">
+                  <div class="menuc_cb">
+                     <div class="btn btn_dd2 "><i class="fal fa-long-arrow-left"></i></div>
+                  </div>
+                  <span>Категории</span>
+                  <div class="menuc_cwim">
+                     <? $catalog = db::query("select * from product_catalog where arh is null and level = 1 order by number asc"); ?>
+                     <? if (mysqli_num_rows($catalog)): ?>
+                        <? while ($cat_d = mysqli_fetch_assoc($catalog)): ?>
+                           <? $cat_id = $cat_d['id']; ?>
+                           <div class="menuc_cwi2">
+                              <span><?=$cat_d['name_ru']?></span>
+                              <? if ($cat_id == 1): ?>
+                                 <div class="menuc_cwim2">
+                                    <div class="menuc_cwim2c">
+                                       <span><?=$cat_d['name_ru']?></span>
+                                       <? $catalog2 = db::query("select * from product_catalog where arh is null and parent_id = '$cat_id' order by number asc"); ?>
+                                       <? if (mysqli_num_rows($catalog2)): ?>
+                                          <? while ($cat2_d = mysqli_fetch_assoc($catalog2)): ?>
+                                             <div class="menuc_cwi2">
+                                                <span><?=$cat2_d['name_ru']?></span>
+                                                <div class=""></div>
+                                             </div>
+                                          <? endwhile ?>
+                                       <? endif ?>
+                                    </div>
+                                 </div>
+                              <? endif ?>
+                           </div>
+                        <? endwhile ?>
+                     <? endif ?>
+                     <!-- <div class="menuc_cwi2">
+                        <span></span>
+                     </div> -->
+                  </div>
+               </div>
+               <div class="menuc_cwi">
+                  <span>Rooms</span>
+               </div>
+               <div class="menuc_cwi">
+                  <span>Дизайнерам</span>
+               </div>
+               <div class="menuc_cwi">
+                  <span>Контакты</span>
+               </div>
+               <div class="menuc_cwi">
+                  <span>Доставка</span>
+               </div>
+               <div class="menuc_cwi">
+                  <span>Кабинет</span>
+               </div>
+            </div>
          </div>
       </div>
    </div>
 <? endif ?>
 
 <? if ($site_set['header'] == true): ?>
-   <div class="header <?=($site_set['ph_header']==true?'ph_none':'')?>">
+   <div id="top" class="header <?=($site_set['ph_header']==true?'ph_none':'')?>">
       <div class="bl_c">
          <div class="header_c">
             <a class="header_logo" href="/"><?=$site['name']?></a>
@@ -50,11 +110,12 @@
             <div class="dmenu_c">
                <div class="dmenu_cm">
                   <a href="/products/">Товары</a>
-                  <a href="/products/production/">Производство</a>
-                  <!-- <a href="/products/rooms/">Комнаты</a> -->
-                  <a href="/home-design/">Дизайн</a>
+                  <!-- <a href="/products/production/">Производство</a> -->
+                  <a href="/products/rooms/">Комнаты</a>
                   <a href="/retails/">Магазины</a>
-                  <a href="/sales/">Акций</a>
+                  <a href="/designer/">Дизайнером</a>
+                  <!-- <a href="/home-design/">Дизайн</a> -->
+                  <!-- <a href="/sales/">Акций</a> -->
                </div>
                <div class="dmenu_cm dmenu_cm2">
                   <a href="#">

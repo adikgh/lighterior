@@ -4,10 +4,11 @@
 	if(isset($_GET['sign'])) {
 		$phone = strip_tags($_POST['phone']);
 		$password = strip_tags($_POST['password']);
+		$password = md5($password);
 		$user = db::query("SELECT * FROM user WHERE phone = '$phone'");
 		if (mysqli_num_rows($user)) {
 			$user_d = mysqli_fetch_assoc($user);
-			if ($password == $user_d['password']) {
+			if ($password == $user_d['password2']) {
 				$_SESSION['uph'] = $phone;
 				$_SESSION['ups'] = $password;
 				setcookie('uph', $phone, time() + 3600*24*30*6, '/');
@@ -19,7 +20,39 @@
 		exit();
 	}
 
+	// sign up
+	if(isset($_GET['sign_up'])) {
+		$name = strip_tags($_POST['name']);
+		$surname = strip_tags($_POST['surname']);
+		$phone = strip_tags($_POST['phone']);
+		$password = strip_tags($_POST['password']);
+		$password = md5($password);
+		
+		$user = db::query("SELECT * FROM user WHERE phone = '$phone'");
+		if (!mysqli_num_rows($user)) {
+			$ins = db::query("INSERT INTO `user`(`phone`, `password2`, `name`, `surname`) VALUES ('$phone', '$password', '$name', '$surname')");
+			if ($ins) {
+				$_SESSION['uph'] = $phone;
+				$_SESSION['ups'] = $password;
+				setcookie('uph', $phone, time() + 3600*24*30*6, '/');
+				setcookie('ups', $password, time() + 3600*24*30*6, '/');
+				echo 'yes';
+			}
+			else echo 'none';			
+		} else echo 'phone';
+		exit();
+	}
 
+
+
+
+
+
+
+
+
+
+	
 
 
 	// sign in
@@ -88,55 +121,37 @@
 
 
 
-	// sign up
-	if(isset($_GET['sign_up_phone'])) {
-		$phone = strip_tags($_POST['phone']);
-		$user = db::query("SELECT * FROM user WHERE phone = '$phone'");
-		if (mysqli_num_rows($user)) {
-			$user_d = mysqli_fetch_assoc($user);
-			if ($user_d['password'] == null) {
-				if ($user_d['code'] != null) {
-					$code = $user_d['code'];
-					$mess = "Aru Academy | Тексеру коды: $code";
-					list($sms_id, $sms_cnt, $cost, $balance) = send_sms($phone, $mess, 0, 0, 0, 0, false);
-				} else {
-					$ins = db::query("UPDATE `user` SET `code`='$code' WHERE phone = '$phone'");
-					$mess = "Aru Academy | Тексеру коды: $code";
-					list($sms_id, $sms_cnt, $cost, $balance) = send_sms($phone, $mess, 0, 0, 0, 0, false);
-				}
-				echo 'code';
-			} else echo 'password';
-		} else echo 'phone';
-		exit();
-	}
+
+
 	// code
-	if(isset($_GET['sign_up_code'])) {
-		$phone = strip_tags($_POST['phone']);
-		$code = strip_tags($_POST['code']);
-		$user = db::query("SELECT * FROM user WHERE phone = '$phone' and code = '$code'");
-		if (mysqli_num_rows($user)) {
-			$_SESSION['phone'] = $phone;
-			$_SESSION['code'] = $code;
-			echo 'yes';
-		} else echo 'none';
-		exit();
-	}
+	// if(isset($_GET['sign_up_code'])) {
+	// 	$phone = strip_tags($_POST['phone']);
+	// 	$code = strip_tags($_POST['code']);
+	// 	$user = db::query("SELECT * FROM user WHERE phone = '$phone' and code = '$code'");
+	// 	if (mysqli_num_rows($user)) {
+	// 		$_SESSION['phone'] = $phone;
+	// 		$_SESSION['code'] = $code;
+	// 		echo 'yes';
+	// 	} else echo 'none';
+	// 	exit();
+	// }
+
 	// sign_up final
-	if(isset($_GET['sign_up_final'])) {
-		$name = strip_tags($_POST['name']);
-		$password = strip_tags($_POST['password']);
-		if (isset($_SESSION['phone']) && isset($_SESSION['code'])) {
-			$phone = $_SESSION['phone'];
-			$code = $_SESSION['code'];
-			$upd = db::query("UPDATE `user` SET `name`='$name', `password`='$password' WHERE phone = '$phone' and code = '$code'");
-			$_SESSION['uph'] = $phone;
-			setcookie('uph', $phone, time() + 3600*24*30);
-			$_SESSION['ups'] = $password;
-			setcookie('ups', $password, time() + 3600*24*30);
-		}
-		echo "yes";
-		exit();
-	}
+	// if(isset($_GET['sign_up_final'])) {
+	// 	$name = strip_tags($_POST['name']);
+	// 	$password = strip_tags($_POST['password']);
+	// 	if (isset($_SESSION['phone']) && isset($_SESSION['code'])) {
+	// 		$phone = $_SESSION['phone'];
+	// 		$code = $_SESSION['code'];
+	// 		$upd = db::query("UPDATE `user` SET `name`='$name', `password`='$password' WHERE phone = '$phone' and code = '$code'");
+	// 		$_SESSION['uph'] = $phone;
+	// 		setcookie('uph', $phone, time() + 3600*24*30);
+	// 		$_SESSION['ups'] = $password;
+	// 		setcookie('ups', $password, time() + 3600*24*30);
+	// 	}
+	// 	echo "yes";
+	// 	exit();
+	// }
 
 
 
@@ -160,6 +175,7 @@
 		} else echo 'phone';
 		exit();
 	}
+
 	// code
 	if(isset($_GET['reset_code'])) {
 		$phone = strip_tags($_POST['phone']);
@@ -172,6 +188,7 @@
 		} else echo 'none';
 		exit();
 	}
+
 	// sign_up final
 	if(isset($_GET['reset_final'])) {
 		$password = strip_tags($_POST['password']);
@@ -259,5 +276,62 @@
 		setcookie('ups', $password, time() + 3600*24*30);
 
 		echo "yes";
+		exit();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// product_add 
+	if(isset($_GET['staff_add'])) {
+		$name = strip_tags($_POST['name']);
+		$phone = strip_tags($_POST['phone']);
+		
+		// $mess = "Вам доступна платформа. \nСсылка: https://lighterior.kz/";
+		// $password = '123456';
+		// $password2 = md5($password);
+
+		$user_pr_d = fun::user_phone($phone);
+		if ($user_pr_d == 0) {
+			// $user_id = (mysqli_fetch_assoc(db::query("SELECT max(id) FROM `user`")))['max(id)'] + 1;
+			// $user_ins = db::query("INSERT INTO `user`(`id`, `phone`, `password`, `password2`, `name`, `rights`) VALUES ('$user_id', '$phone', '$password', '$password2', '$name', 1)");
+			// if ($user_ins) list($sms_id, $sms_cnt, $cost, $balance) = send_sms($phone, $mess, 0, 0, 0, 0, false);
+			echo 'none';
+		} else {
+			$partner_id = $user_pr_d['id'];
+			$user_dpd = fun::user_designer_partners($partner_id);
+			if ($user_dpd == 0) {
+				$user_ins = db::query("INSERT INTO `user_designer_partners`(`user_id`, `partner_id`) VALUES ('$user_id', '$partner_id')");
+				if ($user_ins) echo 'yes'; else echo 'error';
+			} else echo 'has';
+
+		}
+
+		exit();
+	}
+	
+	// meng_delete 
+	if(isset($_GET['meng_delete'])) {
+		$id = strip_tags($_POST['id']);
+		// $upd = db::query("DELETE FROM `product_item` WHERE `product_id` = '$id'");
+		$del = db::query("DELETE FROM `user_designer_partners` WHERE `id` = '$id'");
+		if ($del) echo 'yes';
+		else echo 'error';
 		exit();
 	}

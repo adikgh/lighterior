@@ -68,11 +68,11 @@
 							
 							<div class="carts_i">
 								<div class="carts_i1">
-									<a class="carts_ic" href="item/?id=<?=$item_d['id']?>">
+									<a class="carts_ic" href="../products/item/?id=<?=$item_d['id']?>">
 										<div class="item_img">
 											<? if ($item_d['img'] || $item_d['img_room']): ?>
-												<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$item_d['img']?>"></div>
-												<? if ($item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$item_d['img_room']?>"></div> <? endif ?>
+												<div class="item_img_c lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$item_d['img']?>"></div>
+												<? if ($item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$item_d['img_room']?>"></div> <? endif ?>
 											<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
 										</div>
 									</a>
@@ -145,7 +145,8 @@
 								</div>
 							</div>
 							<div class="carts_pp">
-								<a class="btn btn_or" href="delivery.php">Оформить заказ</a>
+								<!-- <a class="btn btn_or" href="delivery.php">Оформить заказ</a> -->
+								<div class="btn btn_or delivery_order" data-sum="<?=$totol?>">Оформить</div>
 							</div>
 						</div>
 					</div>
@@ -161,26 +162,19 @@
 									</div>
 								</div>
 								<div class="carts_pp">
-									<a class="btn btn_or" href="delivery.php">Оформить</a>
+									<!-- <a class="btn btn_or" href="delivery.php">Оформить</a> -->
+									<div class="btn btn_or delivery_order" data-sum="<?=$totol?>">Оформить</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
 				</div>
+
 			<? else: ?>
-				<div class="dev">
-					<div class="bl_c">
-						<div class="dev_c">
-							<div class="devc_t">
-								<h2>У вас пустой корзина</h2>
-								<div class="devc_b">
-									<a class="btn" href="/">Главная</a>
-								</div>
-							</div> 
-						</div>
-					</div>
-				</div>
+
+				<h6>У вас пустой корзина</h6>
+
 			<? endif ?>
 
 		</div>
