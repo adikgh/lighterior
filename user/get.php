@@ -335,3 +335,55 @@
 		else echo 'error';
 		exit();
 	}
+
+
+
+
+
+
+
+
+
+
+
+	// product_add 
+	if(isset($_GET['designer_add'])) {
+		$id = strip_tags($_POST['id']);
+		$compn = strip_tags($_POST['compn']);
+		$ins = strip_tags($_POST['ins']);
+		$site = strip_tags($_POST['site']);
+
+		$designer_d = fun::user_designer($id);
+		if ($designer_d == 0) {
+			$ins = db::query("INSERT INTO `user_designer`(`user_id`, `company_name`, `instagram`, `site`) VALUES ('$id', '$compn', '$ins', '$site')");
+			if ($ins) echo 'on'; else echo 'error';
+		} else echo 'yes';
+
+		exit();
+	}
+
+	// product_add 
+	if(isset($_GET['designer_edit'])) {
+		$id = strip_tags($_POST['id']);
+		$name = strip_tags($_POST['name']);
+		$compn = strip_tags($_POST['compn']);
+		$ins = strip_tags($_POST['ins']);
+		$site = strip_tags($_POST['site']);
+
+		if ($name) $upd = db::query("UPDATE `user` SET `name` = '$name' WHERE `id` = '$id'");
+		if ($compn) $upd = db::query("UPDATE `user_designer` SET `company_name` = '$compn' WHERE `user_id` = '$id'");
+		if ($ins) $upd = db::query("UPDATE `user_designer` SET `instagram` = '$ins' WHERE `user_id` = '$id'");
+		if ($site) $upd = db::query("UPDATE `user_designer` SET `site` = '$site' WHERE `user_id` = '$id'");
+		echo 'yes';
+		
+		exit();
+	}
+	
+	// meng_delete 
+	if(isset($_GET['designer_delete'])) {
+		$id = strip_tags($_POST['id']);
+		$upd = db::query("UPDATE `user` SET designer = null WHERE `id` = '$id'");
+		$del = db::query("DELETE FROM `user_designer` WHERE `user_id` = '$id'");
+		if ($del) echo 'yes'; else echo 'error';
+		exit();
+	}

@@ -147,7 +147,8 @@
 											</div>
 											<? if ($item_d['price']): ?>
 												<div class="item_price">
-													<span><?=$item_d['price']?></span>
+													<? if ($designer): ?><span><?=($item_d['price'] - ($item_d['price'] / 10))?></span>
+													<? else: ?><span><?=$item_d['price']?></span><? endif ?>
 													<i class="fas fa-tenge"></i>
 												</div>
 											<? endif ?>

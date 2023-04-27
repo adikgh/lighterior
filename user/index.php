@@ -1,8 +1,8 @@
 <?php include "../config/core.php";
 
 	// Қолданушыны тексеру
-	if (!$user_id) header('location: /user/sign2.php');
-	// else header('location: /user/acc');
+	if (!$user_id) header('location: /user/sign.php');
+	else header('location: /user/acc/');
 
 	// site setting
 	$menu_name = 'user';

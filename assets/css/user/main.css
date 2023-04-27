@@ -1810,3 +1810,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*  */
+.ys_p{
+	position: relative;
+	width: 100%;
+	background: var(--wh);
+	padding: 20px 30px;
+	border-radius: 8px;
+	border: 1px solid var(--gr2);
+	margin-bottom: 30px;
+}
+.ys_p .form_c{
+	max-width: 500px;
+}

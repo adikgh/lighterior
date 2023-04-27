@@ -64,7 +64,13 @@
 						<? while ($fp_d = mysqli_fetch_assoc($favorites)): ?>
 							<? $pr_d = product::product($fp_d['product_id']); ?>
 							<? if ($user_id) $item_d = product::pr_item($fp_d['item_id']); else $item_d = $fp_d; ?>
-							<? $number++; $sum = $item_d['price'] * $fp_d['quantity']; $totol = $totol + $sum; ?>
+							<? $number++; ?>
+
+							<? 
+								if ($designer) { $sum = ($item_d['price'] - ($item_d['price'] / 10)) * $fp_d['quantity']; $totol = $totol + $sum; }
+								else { $sum = $item_d['price'] * $fp_d['quantity']; $totol = $totol + $sum; }
+							?>
+							
 							
 							<div class="carts_i">
 								<div class="carts_i1">
@@ -90,7 +96,8 @@
 											<div class="carts_ic_pri">
 												<span>Цена</span>
 												<div class="item_price">
-													<span class="fr_number"><?=$item_d['price']?></span>
+													<? if ($designer): ?><span class="fr_number"><?=($item_d['price'] - ($item_d['price'] / 10))?></span>
+													<? else: ?><span class="fr_number"><?=$item_d['price']?></span><? endif ?>
 													<i class="fal fa-tenge"></i>
 												</div>
 											</div>
@@ -99,7 +106,7 @@
 								</div>
 								<div class="carts_im">
 									<div class="carts_iz carts_iz_calc">
-										<div class="uc_uin_calc" data-id="<?=$fp_d['id']?>" data-price="<?=$item_d['price']?>" data-quantity="<?=$fp_d['quantity']?>" data-max="<?=$fp_d['quantity']?>">
+										<div class="uc_uin_calc" data-id="<?=$fp_d['id']?>" data-price="<?=($designer?$item_d['price'] - ($item_d['price'] / 10):$item_d['price'])?>" data-quantity="<?=$fp_d['quantity']?>" data-max="<?=$fp_d['quantity']?>">
 											<div class="uc_uin_calc_m minus_cart"><i class="fal fa-minus"></i></div>
 											<input type="tel" class="uc_uin_calc_q fr_number3 quantity_cart" value="<?=$fp_d['quantity']?>" />
 											<div class="uc_uin_calc_p plus_cart"><i class="fal fa-plus"></i></div>

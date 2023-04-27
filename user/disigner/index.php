@@ -51,42 +51,41 @@
 							<div class="btn user_staff_add_pop">Добавить партнера</div>
 						</div>
 						
-						
-						<div class="">
-
 						<br><br>
 
 						<style>
 							td{padding:10px 15px}
 						</style>
+						
+						<div class="ys_p">
 
-						<table>
-							<tr>
-								<td>#</td>
-								<td>Имя партнера</td>
-								<td>Номер партнера</td>
-								<td>Статус</td>
-								<td>Сумма продажи</td>
-								<td>Время добавитление</td>
-								<td></td>
-							</tr>
+							<table>
+								<tr>
+									<td>#</td>
+									<td>Имя партнера</td>
+									<td>Номер партнера</td>
+									<td>Статус</td>
+									<!-- <td>Сумма продажи</td> -->
+									<td>Время добавитление</td>
+									<td></td>
+								</tr>
 
-							<? if (mysqli_num_rows($order)): ?>
-								<? while ($order_c = mysqli_fetch_assoc($order)): ?>
-									<? $order_id = $order_c['id']; $status = $order_c['status']  ?>
-									<tr>
-										<td><?=$order_c['id']?></td>
-										<td><?=fun::user($order_c['partner_id'])['name']?></td>
-										<td><?=fun::user($order_c['partner_id'])['phone']?></td>
-										<td><?=t::w('order_status_0'.$status, $lang)?> </td>
-										<td style="text-align:right"><?=$order_c['sum']?> тг</td>
-										<td><?=$order_c['ins_dt']?></td>
-										<td><div class="btn btn_dd user_staff_btn_delete" data-id="<?=$order_c['id']?>">X</div></td>
-									</tr>
-								<? endwhile ?>
-							<? endif ?>
+								<? if (mysqli_num_rows($order)): ?>
+									<? while ($order_c = mysqli_fetch_assoc($order)): ?>
+										<? $order_id = $order_c['id']; $status = $order_c['status']  ?>
+										<tr>
+											<td><?=$order_c['id']?></td>
+											<td><?=fun::user($order_c['partner_id'])['name']?></td>
+											<td><?=fun::user($order_c['partner_id'])['phone']?></td>
+											<td><?=t::w('order_status_0'.$status, $lang)?> </td>
+											<!-- <td style="text-align:right"><?=$order_c['sum']?> тг</td> -->
+											<td><?=$order_c['ins_dt']?></td>
+											<td><div class="btn btn_dd user_staff_btn_delete" data-id="<?=$order_c['id']?>">X</div></td>
+										</tr>
+									<? endwhile ?>
+								<? endif ?>
 
-						</table>
+							</table>
 
 						</div>
 
