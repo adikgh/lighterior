@@ -79,7 +79,7 @@ $(document).ready(function() {
       // console.log(payment_method);
 
 		$.ajax({
-			url: "/shoppingcart/get.php?add_order",
+			url: "/cart/get.php?add_order",
 			type: "POST",
 			dataType: "html",
 			data: ({ 

@@ -72,7 +72,7 @@ $(document).ready(function() {
 	$('html').on('click', '.add_cart', function() {
 		btn = $(this)
 		$.ajax({
-			url: "/shoppingcart/get.php?add_cart",
+			url: "/cart/get.php?add_cart",
 			type: "POST",
 			dataType: "html",
 			data: ({ id: btn.attr('data-id'), }),
@@ -87,7 +87,7 @@ $(document).ready(function() {
 	$('html').on('click', '.delete_cart', function() {
 		btn = $(this)
 		$.ajax({
-			url: "/shoppingcart/get.php?delete_cart",
+			url: "/cart/get.php?delete_cart",
 			type: "POST",
 			dataType: "html",
 			data: ({ id: btn.attr('data-id'), }),
@@ -108,7 +108,7 @@ $(document).ready(function() {
 			 
 		} else {
 			$.ajax({
-				url: "/shoppingcart/get.php?minus_cart",
+				url: "/cart/get.php?minus_cart",
 				type: "POST",
 				dataType: "html",
 				data: ({ id: btn.parent().attr('data-id'), }),
@@ -132,7 +132,7 @@ $(document).ready(function() {
 			 
 		// } else {
 			$.ajax({
-				url: "/shoppingcart/get.php?plus_cart",
+				url: "/cart/get.php?plus_cart",
 				type: "POST",
 				dataType: "html",
 				data: ({ id: btn.parent().attr('data-id'), }),
@@ -157,7 +157,7 @@ $(document).ready(function() {
 			 
 		// } else {
 			$.ajax({
-				url: "/shoppingcart/get.php?quantity_cart",
+				url: "/cart/get.php?quantity_cart",
 				type: "POST",
 				dataType: "html",
 				data: ({ 
