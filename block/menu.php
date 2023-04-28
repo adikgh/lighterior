@@ -94,7 +94,7 @@
                   <a class="header_lang_i <?=($lang=='ru'?'':'header_lang_act')?>" <?=($lang=='ru'?'':'href="'.$url.'?lang=ru"')?>>RU</a>
                </div>
                <div class="header_icons">
-                  <a class="btn btn_dd2" href="/shoppingcart/"><i class="fal fa-shopping-bag"></i></a>
+                  <a class="btn btn_dd2" href="/cart/"><i class="fal fa-shopping-bag"></i></a>
                   <a class="btn btn_dd2" href="/favorites/"><i class="fal fa-heart"></i></a>
                   <a class="btn btn_dd2" href="/user/"><i class="fal fa-user"></i></a>
                   <div class="btn btn_dd2 header_icons_mb menu_clc"><i class="fal fa-bars"></i></div>

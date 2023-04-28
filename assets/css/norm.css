@@ -1788,6 +1788,10 @@ textarea.form_txt{
 	align-items: center;
 	flex-wrap: wrap;
 }
+.footer_b:first-child{
+	border-top: 0;
+}
+
 .footer_bl{
 	position: relative;
 	width: 50%;

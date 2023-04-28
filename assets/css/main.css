@@ -1685,6 +1685,8 @@ span.multis_i::after{display:none}
 
 
 .item_price{
+   position: relative;
+   width: 100%;
    margin-top: 8px;
    /* margin-bottom: 0.5rem; */
    display: inline-flex;
@@ -1707,7 +1709,17 @@ span.multis_i::after{display:none}
    /* unicode-bidi: bidi-override; */
    vertical-align: text-top;
 }
-
+.carts_iz2{
+   align-content: center;
+}
+.carts_iz2 .item_price{
+   width: 100% !important;
+   justify-content: center;
+}
+.item_price_old{
+   text-decoration: line-through;
+   margin-bottom: 10px;
+}
 
 .item_cart{
    position: absolute;
@@ -2068,6 +2080,7 @@ i.item_cart_icon_plus{
    align-items: center;
    justify-content: center;
    text-align: center;
+   flex-wrap: wrap;
 }
 @media (max-width: 500px) {
    .carts_im{

@@ -88,7 +88,7 @@
 
 
    // setting
-   $ver = 5.0063;
+   $ver = 1.15;
    $site = mysqli_fetch_array(db::query("select * from `site` where id = 1"));
    $site_set = [
       'header' => true,
@@ -96,6 +96,7 @@
       'dmenu' => true,
       'search' => true,
       'footer' => true,
+      'footer_t' => true,
 		// 'swiper' => false,
       // 'plyr' => false,
       // 'aos' => false,

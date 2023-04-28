@@ -155,6 +155,9 @@
 								<!-- <a class="btn btn_or" href="delivery.php">Оформить заказ</a> -->
 								<div class="btn btn_or delivery_order" data-sum="<?=$totol?>">Оформить</div>
 							</div>
+							<div class="carts_pp">
+								<a class="btn btn_back" href="offer.php">На offer</a>
+							</div>
 						</div>
 					</div>
 
