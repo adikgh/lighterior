@@ -186,7 +186,7 @@
 							<div class="swiper mySwiper_1">
 								<div class="swiper-wrapper">
 
-									<? $product = db::query("select * from product where catalog_id = 1 limit 10"); $i = 1; ?>
+									<? $product = db::query("select * from product where catalog_id = 2 limit 10"); $i = 1; ?>
 									<? while ($product_d = mysqli_fetch_array($product)): ?>
 										<? $pr_item_d = product::product_item($product_d['id']); ?>
 
