@@ -8,6 +8,9 @@
 
 	// header('location: /plug/');
 
+	$css = ['product', 'production'];
+	$js = ['production'];
+
 ?>
 <? include "block/header.php"; ?>
 
@@ -165,27 +168,114 @@
 				<h4>Популярные светильники</h4>
 			</div>
 			<div class="">
-				<div class="">
-					<div class=""></div>
-					<div class="">
-						<div class=""></div>
-						<div class=""></div>
-						<div class=""></div>
+				<div class="bl22_tc">
+					<div class="bl22_tcl">
+						<div class="lazy_img" data-src="/assets/img/bag/image 23.png"></div>
+					</div>
+					<div class="bl22_tcr">
+						<div class="bl22_tcr1">Светильники магнитной <br> системы освещения</div>
+						<div class="bl22_tcr2">Трековые системы нового поколения</div>
+						<div class="btn btn_back">Подробнее</div>
 					</div>
 				</div>
 				<div class="">
 
-						<div class="">
+					<div class="products_c">
 
-							<div class="">
-								<div class=""></div>
-								<div class="">
-									<div class=""></div>
-									<div class=""></div>
+
+							<div class="swiper mySwiper_1">
+								<div class="swiper-wrapper">
+
+									<? $product = db::query("select * from product where catalog_id = 1 limit 10"); $i = 1; ?>
+									<? while ($product_d = mysqli_fetch_array($product)): ?>
+										<? $pr_item_d = product::product_item($product_d['id']); ?>
+
+										<div class="swiper-slide item">
+											<div class="item_c">
+												<a href="item/?id=<?=$pr_item_d['id']?>">
+													<div class="item_con">
+														<div class="item_cons">
+															<div class="item_name"><?=$pr_d['name_ru']?> | <?=$pr_item_d['article']?></div>
+															<div class="item_desc"><?=$pr_d['description_ru']?></div>
+														</div>
+														<? if ($pr_item_d['price']): ?>
+															<div class="item_price">
+																<span><?=$pr_item_d['price']?></span>
+																<i class="fas fa-tenge"></i>
+															</div>
+														<? endif ?>
+													</div>
+												</a>
+												<a href="item/?id=<?=$pr_item_d['id']?>">
+													<div class="item_img">
+														<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
+															<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+															<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
+														<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
+														<div class="item_img_ppe">Сделано в KZ</div>
+													</div>
+												</a>
+												<div class="item_cn">
+													<div class="item_cn_yy">
+														<div class="item_cn_yyi">
+															<div class="item_cn_yyit">Материал</div>
+															<div class="item_cn_yyic">GIPS</div>
+														</div>
+														<div class="item_cn_yyi">
+															<div class="item_cn_yyit">Монтажное отверстие</div>
+															<div class="item_cn_yyic">200x130</div>
+														</div>
+														<div class="item_cn_yyi">
+															<div class="item_cn_yyit">Тип цоколя</div>
+															<div class="item_cn_yyic">GU10</div>
+														</div>
+														<div class="item_cn_yyi">
+															<div class="item_cn_yyit">Требуемая толшина потолка</div>
+															<div class="item_cn_yyic">9-15см</div>
+														</div>
+													</div>
+													<div class="item_cart">
+														<button class="btn btn_p add_cart" data-id="<?=$pr_item_d['id']?>">Купить</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- <a class="item_others_i <?=($i==1?'item_others_act':'')?>" href="item/?id=<?=$pr_item_d['id']?>">
+											<div class="lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+										</a> -->
+									<? endwhile ?>
+
 								</div>
+								<div class="swiper-button-prev swiper_prev_1"><i class="fal fa-long-arrow-left"></i></div>
+								<div class="swiper-button-next swiper_next_1"><i class="fal fa-long-arrow-right"></i></div>
 							</div>
-						
-						</div>
+
+							<script>
+								var swiper_1 = new Swiper(".mySwiper_1", {
+									navigation: {
+										nextEl: ".swiper_next_1",
+										prevEl: ".swiper_prev_1",
+									},
+									breakpoints: {
+										320: {
+											slidesPerView: 1,
+											spaceBetween: 20,
+										},
+										501: {
+											slidesPerView: 2,
+											spaceBetween: 30,
+										},
+										1025: {
+											slidesPerView: 3,
+											spaceBetween: 40,
+										}
+									}
+								});
+							</script>
+
+
+					</div>
 
 				</div>
 			</div>
