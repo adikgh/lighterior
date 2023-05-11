@@ -111,7 +111,7 @@
                <div class="dmenu_cm">
                   <a href="/products/">Товары</a>
                   <!-- <a href="/products/production/">Производство</a> -->
-                  <a href="/products/rooms/">Комнаты</a>
+                  <a href="/rooms/">Комнаты</a>
                   <a href="/retails/">Магазины</a>
                   <a href="/designer/">Дизайнером</a>
                   <!-- <a href="/home-design/">Дизайн</a> -->

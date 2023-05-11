@@ -8,8 +8,8 @@
 
 	// header('location: /plug/');
 
-	$css = ['product', 'production'];
-	$js = ['production'];
+	// $css = ['product', ''];
+	// $js = [''];
 
 ?>
 <? include "block/header.php"; ?>
@@ -182,6 +182,7 @@
 
 					<div class="products_c">
 
+							<div class="products_crm"><a href="#">СМОТРЕТЬ ВСЕ</a></div>
 
 							<div class="swiper mySwiper_1">
 								<div class="swiper-wrapper">
@@ -193,10 +194,17 @@
 										<div class="swiper-slide item">
 											<div class="item_c">
 												<a href="item/?id=<?=$pr_item_d['id']?>">
+													<div class="item_img">
+														<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
+															<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+															<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
+														<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
+													</div>
+												</a>
+												<a href="item/?id=<?=$pr_item_d['id']?>">
 													<div class="item_con">
 														<div class="item_cons">
-															<div class="item_name"><?=$pr_d['name_ru']?> | <?=$pr_item_d['article']?></div>
-															<div class="item_desc"><?=$pr_d['description_ru']?></div>
+															<div class="item_name"><?=$pr_d['name_ru']?></div>
 														</div>
 														<? if ($pr_item_d['price']): ?>
 															<div class="item_price">
@@ -206,74 +214,14 @@
 														<? endif ?>
 													</div>
 												</a>
-												<a href="item/?id=<?=$pr_item_d['id']?>">
-													<div class="item_img">
-														<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
-															<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
-															<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
-														<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
-														<div class="item_img_ppe">Сделано в KZ</div>
-													</div>
-												</a>
-												<div class="item_cn">
-													<div class="item_cn_yy">
-														<div class="item_cn_yyi">
-															<div class="item_cn_yyit">Материал</div>
-															<div class="item_cn_yyic">GIPS</div>
-														</div>
-														<div class="item_cn_yyi">
-															<div class="item_cn_yyit">Монтажное отверстие</div>
-															<div class="item_cn_yyic">200x130</div>
-														</div>
-														<div class="item_cn_yyi">
-															<div class="item_cn_yyit">Тип цоколя</div>
-															<div class="item_cn_yyic">GU10</div>
-														</div>
-														<div class="item_cn_yyi">
-															<div class="item_cn_yyit">Требуемая толшина потолка</div>
-															<div class="item_cn_yyic">9-15см</div>
-														</div>
-													</div>
-													<div class="item_cart">
-														<button class="btn btn_p add_cart" data-id="<?=$pr_item_d['id']?>">Купить</button>
-													</div>
-												</div>
 											</div>
 										</div>
-
-										<!-- <a class="item_others_i <?=($i==1?'item_others_act':'')?>" href="item/?id=<?=$pr_item_d['id']?>">
-											<div class="lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
-										</a> -->
 									<? endwhile ?>
 
 								</div>
 								<div class="swiper-button-prev swiper_prev_1"><i class="fal fa-long-arrow-left"></i></div>
 								<div class="swiper-button-next swiper_next_1"><i class="fal fa-long-arrow-right"></i></div>
 							</div>
-
-							<script>
-								var swiper_1 = new Swiper(".mySwiper_1", {
-									navigation: {
-										nextEl: ".swiper_next_1",
-										prevEl: ".swiper_prev_1",
-									},
-									breakpoints: {
-										320: {
-											slidesPerView: 1,
-											spaceBetween: 20,
-										},
-										501: {
-											slidesPerView: 2,
-											spaceBetween: 30,
-										},
-										1025: {
-											slidesPerView: 3,
-											spaceBetween: 40,
-										}
-									}
-								});
-							</script>
-
 
 					</div>
 
@@ -288,32 +236,39 @@
 				<h4>Подберите по типу помещения</h4>
 			</div>
 			<div class="bl23_c">
-				<div class="swiper bl23_ct swiper_bl23">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide bl23_ct_act" data-id="0">Все</div>
-						<? $catalog = db::query("select * from product_catalog limit 5"); ?>
-						<? if (mysqli_num_rows($catalog)): ?>
-							<? while ($cat_d = mysqli_fetch_assoc($catalog)): ?>
-								<div class="swiper-slide" data-id="<?=$cat_d['id']?>"><?=$cat_d['name_ru']?></div>
-							<? endwhile ?>
-						<? endif ?>
+				<div class="bl23_t">
+					<div class="swiper bl23_ct bl23_ct1 swiper_bl23 ">
+						<div class="swiper-wrapper">
+							<!-- <div class="swiper-slide " data-id="0">Все</div> -->
+							<? $catalog = db::query("select * from rooms where parent_id is null"); ?>
+							<? if (mysqli_num_rows($catalog)): ?>
+								<? while ($cat_d = mysqli_fetch_assoc($catalog)): ?>
+									<div class="swiper-slide <?=($cat_d['id'] == 1?'bl23_ct_act':'')?>" data-id="<?=$cat_d['id']?>"><?=$cat_d['name_ru']?></div>
+								<? endwhile ?>
+							<? endif ?>
+						</div>
 					</div>
+					<div class="bl23_tb"></div>
 				</div>
+
 				<div class="bl23_cs">
 					<div class="bl23_csw">
-						<div class="bl23_csw2">
-							<div class=""></div>
-							<div class=""></div>
-							<div class=""></div>
-							<div class=""></div>
-							<div class=""></div>
-							<div class=""></div>
+						<div class="bl23_csw2 ">
+
+							<? $catalog = db::query("select * from rooms_item where rooms_id = 1 order by ins_dt desc limit 1, 6"); ?>
+							<? if (mysqli_num_rows($catalog)): ?>
+								<? while ($cat_d = mysqli_fetch_assoc($catalog)): ?>
+									<div class="lazy_img" data-src="/assets/uploads/rooms/<?=$cat_d['img']?>"></div>
+								<? endwhile ?>
+							<? endif ?>
+
 						</div>
 					</div>
 					<div class="bl23_csb">
 						<div class="btn">Загрузите еще - 12</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -323,9 +278,17 @@
 		<div class="bl_c">
 			<div class="head_c">
 				<h4>Мы в Instagram</h4>
-				<p>Посмотрите, как наша продукция выглядит в реальных домах! Поделитесь своими фотографиями в Instagram с хэштегом #MyLIGHTERIOR или отметьте @LIGHTERIOR.KZ, чтобы вас могли увидеть здесь!</p>
+				<p>Посмотрите, как наша продукция выглядит в реальных домах! <br> Поделитесь своими фотографиями в Instagram с хэштегом #mylighterior <br> или отметьте <a href="<?=$site['instagram']?>">@<?=$site['instagram']?></a>, чтобы вас могли увидеть здесь!</p>
 			</div>
-			<div class=""></div>
+			<div class="">
+				<div class="swiper rbl4_c">
+					<div class="swiper-wrapper">
+						<? for ($i=0;$i<=10;$i++): ?>
+							<div class="swiper-slide rbl4_i" ></div>
+						<? endfor ?>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -333,28 +296,21 @@
 	<div class="">
 		<div class="bl_c">
 			<div class="head_c">
-				<h4>ИНТЕРНЕТ-МАГАЗИН СВЕТИЛЬНИКОВ И ЛЮСТР «LIGHTERIOR»</h4>
+				<h4 class="txt_c">ИНТЕРНЕТ-МАГАЗИН СВЕТИЛЬНИКОВ И ЛЮСТР «LIGHTERIOR»</h4>
 			</div>
-			<div class="">
-				<div class="">
-					<p>«LIGHTERIOR» — это удобный сервис, с помощью которого легко выбрать светильник, проверить, как он подходит к вашему интерьеру. С помощью калькулятора мощности каждый сможет рассчитать уровень яркости для любого помещения, чтобы убедиться в правильности выбора. Забрать товар можно самовывозом в шоу-руме или заказать курьерскую доставку на дом.
-
-					Наш ассортимент осветительных приборов — это более 120 брендов, среди которых: потолочные, встраиваемые, подвесные и трековые светильники. Есть роскошные хрустальные, лаконичные металлические, натуральные деревянные, воздушные стеклянные — любые модели, которые только можно представить.
-
-					Наш каталог постоянно пополняется новинками — как только у представленного бренда выходит новая коллекция, она сразу появляется в продаже у нас. Среди представленных марок — самые популярные бренды Италии, Германии, Испании, Австрии, Бельгии, Чехии, Польши, Дании, Швеции, Франции, Турции, США, Китая и, конечно, России.
-
-					Кроме регулярного обновления и пополнения ассортимента осветительных приборов, мы постоянно проводим акции — распродажи светильников и люстр со значительными скидками — порой они достигают 90%!</p>
+			<div class="rbl5_c">
+				<div class="rbl5_l">
+					<p>«LIGHTERIOR» — это удобный сервис, с помощью которого легко выбрать светильник, проверить, как он подходит к вашему интерьеру. С помощью калькулятора мощности каждый сможет рассчитать уровень яркости для любого помещения, чтобы убедиться в правильности выбора. Забрать товар можно самовывозом в шоу-руме или заказать курьерскую доставку на дом.</p>
+				 	<p>Наш ассортимент осветительных приборов — это более 120 брендов, среди которых: потолочные, встраиваемые, подвесные и трековые светильники. Есть роскошные хрустальные, лаконичные металлические, натуральные деревянные, воздушные стеклянные — любые модели, которые только можно представить.</p>
+				 	<p>Наш каталог постоянно пополняется новинками — как только у представленного бренда выходит новая коллекция, она сразу появляется в продаже у нас. Среди представленных марок — самые популярные бренды Италии, Германии, Испании, Австрии, Бельгии, Чехии, Польши, Дании, Швеции, Франции, Турции, США, Китая и, конечно, России.</p>
+				 	<p>Кроме регулярного обновления и пополнения ассортимента осветительных приборов, мы постоянно проводим акции — распродажи светильников и люстр со значительными скидками — порой они достигают 90%!</p>
 				</div>
-				<div class="">
-					<p>Это отличная возможность дополнить свой интерьер настольной лампой или торшером, купить люстру, выбрать подарок или полностью обновить свет во всем доме.
-
-					«LIGHTERIOR» — это простые лаконичные модели и эксклюзивные дизайнерские люстры из хрусталя, достойные самых роскошных интерьеров.
-
-					Наша служба доставки быстро и аккуратно привезет заказанные товары, а установкой осветительной техники займутся специалисты службы монтажа. Кстати, если воспользоваться услугами наших специалистов, гарантийный срок на оборудование увеличивается до 2 лет! Так что лучше доверить работу профессионалам, которые сделают всё быстро и качественно — в квартире, доме или офисе.
-
-					Если у вас остались вопросы, свяжитесь с менеджерами интернет-магазина люстр и светильников «ВамСвет» по телефону 8 (777) 154-10-63 или закажите обратный звонок, оставив контактные данные.
-
-					Мы несем свет вам и вашему дому!</p>
+				<div class="rbl5_r">
+					<p>Это отличная возможность дополнить свой интерьер настольной лампой или торшером, купить люстру, выбрать подарок или полностью обновить свет во всем доме.</p>
+					<p>«LIGHTERIOR» — это простые лаконичные модели и эксклюзивные дизайнерские люстры из хрусталя, достойные самых роскошных интерьеров.</p>
+					<p>Наша служба доставки быстро и аккуратно привезет заказанные товары, а установкой осветительной техники займутся специалисты службы монтажа. Кстати, если воспользоваться услугами наших специалистов, гарантийный срок на оборудование увеличивается до 2 лет! Так что лучше доверить работу профессионалам, которые сделают всё быстро и качественно — в квартире, доме или офисе.</p>
+					<p>Если у вас остались вопросы, свяжитесь с менеджерами интернет-магазина люстр и светильников «<?=$site['name']?>» по телефону <a href="tel:<?=$site['phone']?>"><?=$site['phone_view']?></a> или <a href="#">закажите обратный звонок</a>, оставив контактные данные.</p>
+					<p>Мы несем свет вам и вашему дому!</p>
 				</div>
 			</div>
 		</div>

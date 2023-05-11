@@ -195,6 +195,15 @@
 
 
 
+		//  
+		public static function rooms($id) {
+			$sql = db::query("select * from rooms where id = '$id'");
+			if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
+		}
+
+
+
+
 
 
 

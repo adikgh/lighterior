@@ -291,6 +291,75 @@ $(document).ready(function() {
 			})
 		}
 	})
+
+
+
+
+	$('.bl23_ct1 .swiper-slide').on('click', function() {
+		btn = $(this)
+
+		if (btn.hasClass('bl23_ct_act') == false) {
+			$('.bl23_ct1 .swiper-slide').removeClass('bl23_ct_act');
+			btn.addClass('bl23_ct_act');
+
+			$.ajax({
+				url: "/rooms/view_i.php",
+				type: "POST",
+				dataType: "html",
+				data: ({ id: btn.attr('data-id') }),
+				beforeSend: function(){  },
+				success: function(data){
+					if (data == 'none') console.log(data)
+					else $('.bl23_tb').html(data)
+				},
+				error: function(data){}
+			})
+
+			$.ajax({
+				url: "/rooms/view_ii.php",
+				type: "POST",
+				dataType: "html",
+				data: ({ id: btn.attr('data-id') }),
+				beforeSend: function(){  },
+				success: function(data){
+					if (data == 'none') console.log(data)
+					else {
+						$('.bl23_csw2').html(data)
+						$('.lazy_img').lazy({effect:"fadeIn",effectTime:300,threshold:0})
+					}
+				},
+				error: function(data){}
+			})
+
+		}
+
+	})
+
+	$('html').on('click', '.bl23_ct2 .swiper-slide', function() {
+		btn = $(this)
+
+		if (btn.hasClass('bl23_ct_act') == false) {
+			$('.bl23_ct2 .swiper-slide').removeClass('bl23_ct_act');
+			btn.addClass('bl23_ct_act');
+
+			$.ajax({
+				url: "/rooms/view_ii.php",
+				type: "POST",
+				dataType: "html",
+				data: ({ id: btn.attr('data-id') }),
+				beforeSend: function(){  },
+				success: function(data){
+					if (data == 'none') console.log(data)
+					else {
+						$('.bl23_csw2').html(data)
+						$('.lazy_img').lazy({effect:"fadeIn",effectTime:300,threshold:0})
+					}
+				},
+				error: function(data){}
+			})
+		}
+
+	})
 	
 
 
@@ -331,7 +400,35 @@ $(document).ready(function() {
 	// });
 
 
+	var swiper_1 = new Swiper(".mySwiper_1", {
+		navigation: {
+			nextEl: ".swiper_next_1",
+			prevEl: ".swiper_prev_1",
+		},
+		breakpoints: {
+			320: {
+				slidesPerView: 1,
+				spaceBetween: 20,
+			},
+			501: {
+				slidesPerView: 2,
+				spaceBetween: 30,
+			},
+			1025: {
+				slidesPerView: 4,
+				spaceBetween: 40,
+			}
+		}
+	});
 
+
+	var rbl4_c = new Swiper(".rbl4_c", {
+		slidesPerView: "auto",
+		navigation: {
+			nextEl: ".swiper_next_1",
+			prevEl: ".swiper_prev_1",
+		},
+	});
 
 
 
