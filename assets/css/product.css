@@ -9,3 +9,9 @@
    .app_body{padding-top:64px}
    .app_body{padding-bottom:64px}
 }
+
+
+
+.products_c{
+   display: grid;
+}

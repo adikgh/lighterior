@@ -28,14 +28,14 @@
                      <? $catalog = db::query("select * from product_catalog where arh is null and level = 1 order by number asc"); ?>
                      <? if (mysqli_num_rows($catalog)): ?>
                         <? while ($cat_d = mysqli_fetch_assoc($catalog)): ?>
-                           <? $cat_id = $cat_d['id']; ?>
+                           <? $menu_cat_id = $cat_d['id']; ?>
                            <div class="menuc_cwi2">
                               <span><?=$cat_d['name_ru']?></span>
-                              <? if ($cat_id == 1): ?>
+                              <? if ($menu_cat_id == 1): ?>
                                  <div class="menuc_cwim2">
                                     <div class="menuc_cwim2c">
                                        <span><?=$cat_d['name_ru']?></span>
-                                       <? $catalog2 = db::query("select * from product_catalog where arh is null and parent_id = '$cat_id' order by number asc"); ?>
+                                       <? $catalog2 = db::query("select * from product_catalog where arh is null and parent_id = '$menu_cat_id' order by number asc"); ?>
                                        <? if (mysqli_num_rows($catalog2)): ?>
                                           <? while ($cat2_d = mysqli_fetch_assoc($catalog2)): ?>
                                              <div class="menuc_cwi2">

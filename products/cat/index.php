@@ -4,7 +4,6 @@
 
 	$cat_id = $_GET['id'];
 
-
 	// filter
 	if ($_GET['on'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0");
 	elseif ($_GET['off'] == 1) $product_all = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 and arh = 0");

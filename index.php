@@ -9,7 +9,7 @@
 	// header('location: /plug/');
 
 	// $css = ['product', ''];
-	// $js = [''];
+	$js = ['index'];
 
 ?>
 <? include "block/header.php"; ?>
