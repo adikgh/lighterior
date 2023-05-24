@@ -76,3 +76,15 @@
 .item_con{
    padding-top: 8px;
 }
+
+
+
+
+.mySwiper_5 .item{
+   width: 160px;
+   min-height: 160px;
+}
+
+.mySwiper_2 .item{
+   width: calc(25% - 55px);
+}

@@ -215,9 +215,91 @@
 			</div>
 
 			<div class="">
+
 				<div class="">
 					<div class="head_c">
 						<h4>Может вам понравиться</h4>
+					</div>
+					<div class="swiper mySwiper_2">
+							<div class="swiper-wrapper">
+
+								<? $product_ltv = db::query("select * from product where catalog_id = 5 and sale_online = 1 order by id desc limit 10"); $i = 1; ?>
+								<? while ($product_ltvd = mysqli_fetch_array($product_ltv)): ?>
+									<? $pr_item_d = product::product_item($product_ltvd['id']); ?>
+
+									<div class="swiper-slide item">
+										<div class="item_c">
+											<a href="?id=<?=$pr_item_d['id']?>">
+												<div class="item_img">
+													<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
+														<div class="item_img_c lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+														<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
+													<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
+												</div>
+											</a>
+											<a href="item/?id=<?=$pr_item_d['id']?>">
+												<div class="item_con">
+													<div class="item_cons">
+														<div class="item_name"><?=$product_ltvd['name_ru']?></div>
+													</div>
+													<? if ($pr_item_d['price']): ?>
+														<div class="item_price">
+															<span><?=$pr_item_d['price']?></span>
+															<i class="fas fa-tenge"></i>
+														</div>
+													<? endif ?>
+												</div>
+											</a>
+											<div class="item_cart">
+												<button class="btn btn_dd btn_dd_cl add_cart" data-id="<?=$pr_item_d['id']?>">
+													<div class="item_cart_btn_add">
+														<i class="fal fa-shopping-bag"></i>
+														<i class="fal fa-plus item_cart_icon_plus"></i>
+													</div>
+												</button>
+											</div>
+										</div>
+									</div>
+								<? endwhile ?>
+
+							</div>
+							<div class="swiper-scrollbar swiper_scrollbar2"></div>
+							<!-- <div class="swiper-button-prev swiper_prev_1"><i class="fal fa-long-arrow-left"></i></div> -->
+							<!-- <div class="swiper-button-next swiper_next_1"><i class="fal fa-long-arrow-right"></i></div> -->
+						</div>
+					</div>
+				</div>
+
+				<div class="">
+					<div class="head_c">
+						<h4>Недавно просмотренные товары</h4>
+					</div>
+					<div class="itc_ltvc ">
+						<div class="swiper mySwiper_5">
+							<div class="swiper-wrapper">
+
+								<? $product_ltv = db::query("select * from product where catalog_id = 4 and sale_online = 1 order by id desc limit 30"); $i = 1; ?>
+								<? while ($product_ltvd = mysqli_fetch_array($product_ltv)): ?>
+									<? $pr_item_d = product::product_item($product_ltvd['id']); ?>
+
+									<div class="swiper-slide item">
+										<div class="item_c">
+											<a href="?id=<?=$pr_item_d['id']?>">
+												<div class="item_img">
+													<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
+														<div class="item_img_c lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+													<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
+												</div>
+											</a>
+										</div>
+									</div>
+								<? endwhile ?>
+
+							</div>
+							<div class="swiper-scrollbar swiper_scrollbar5"></div>
+							<!-- <div class="swiper-button-prev swiper_prev_1"><i class="fal fa-long-arrow-left"></i></div> -->
+							<!-- <div class="swiper-button-next swiper_next_1"><i class="fal fa-long-arrow-right"></i></div> -->
+						</div>
 					</div>
 				</div>
 
