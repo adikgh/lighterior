@@ -243,7 +243,28 @@ smail{font-size:14px}
 .swiper-slide {}
 .gallery-top {}
 .gallery-thumbs {}
-
+.swiper-horizontal > .swiper-scrollbar{
+	left: 0;
+	bottom: 10px;
+	z-index: 50;
+	height: 2px;
+	width: 100%;
+	border-radius: 4px;
+	background: var(--gr2);
+	transition: .3s;
+}
+.swiper-scrollbar:hover{
+	height: 4px;
+	bottom: 9px;
+}
+.swiper-scrollbar-drag {
+	background: var(--bl);
+	transition: .3s;
+}
+.swiper-scrollbar-drag:active {
+	height: 8px;
+	margin-top: -2px;
+}
 
 
 

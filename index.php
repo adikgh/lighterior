@@ -187,7 +187,7 @@
 							<div class="swiper mySwiper_1">
 								<div class="swiper-wrapper">
 
-									<? $product = db::query("select * from product where catalog_id = 2 limit 10"); $i = 1; ?>
+									<? $product = db::query("select * from product where catalog_id = 4 and sale_online = 1 order by id desc limit 10"); $i = 1; ?>
 									<? while ($product_d = mysqli_fetch_array($product)): ?>
 										<? $pr_item_d = product::product_item($product_d['id']); ?>
 
@@ -196,8 +196,8 @@
 												<a href="item/?id=<?=$pr_item_d['id']?>">
 													<div class="item_img">
 														<? if ($pr_item_d['img'] || $pr_item_d['img_room']): ?>
-															<div class="item_img_c lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
-															<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
+															<div class="item_img_c lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img']?>"></div>
+															<? if ($pr_item_d['img_room']): ?> <div class="item_img_c item_img_abs lazy_img" data-src="https://admin.lighterior.kz/assets/uploads/products/<?=$pr_item_d['img_room']?>"></div> <? endif ?>
 														<? else: ?> <div class="item_img_c"><span>Фото скоро появится</span></div> <? endif ?>
 													</div>
 												</a>
