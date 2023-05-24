@@ -2425,7 +2425,10 @@ i.item_cart_icon_plus{
 
 
 .itc_r{
-   position: relative;
+   /* position: relative; */
+   
+   position: sticky;
+   top: 40px;
    width: 30%;
 }
 
@@ -2433,6 +2436,14 @@ i.item_cart_icon_plus{
    position: relative;
    width: 100%;
 }
+.itc_rt .btn{
+   position: absolute;
+   right: 0;
+   top: 0;
+}
+
+
+
 .itc_rt_name{
    position: relative;
    width: 100%;
@@ -2540,15 +2551,11 @@ i.item_cart_icon_plus{
    justify-content: space-between;
    align-items: center;
 }
-.itc_o .btn:first-child{
-   width: calc(100% - 54px - 20px);
+.itc_o .btn{
+   /* width: calc(100% - 54px - 20px); */
+   width: 100%;
    height: 54px;
 }
-.itc_o .btn:last-child{
-   width: 54px;
-   height: 54px;
-}
-
 
 
 

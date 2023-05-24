@@ -11,6 +11,9 @@
 	$product = product::product($item_d['product_id']);
 	$product_id = $product['id'];
 
+	$cat_id = $product['catalog_id'];
+
+
 	// site setting
 	$menu_name = 'item';
 	$site_set['swiper'] = true;
@@ -127,7 +130,7 @@
 							<div class="swiper mySwiper_1">
 								<div class="swiper-wrapper">
 
-									<? $product_ltv = db::query("select * from product where catalog_id = 4 and sale_online = 1 order by id desc limit 10"); $i = 1; ?>
+									<? $product_ltv = db::query("select * from product where catalog_id = '$cat_id' and sale_online = 1 order by id desc limit 10"); $i = 1; ?>
 									<? while ($product_ltvd = mysqli_fetch_array($product_ltv)): ?>
 										<? $pr_item_d = product::product_item($product_ltvd['id']); ?>
 
@@ -178,13 +181,14 @@
 
 				<div class="itc_r">
 					<div class="itc_rt">
+						<div class="btn btn_dd add_favorites" data-id="<?=$item_d['id']?>"><i class="fal fa-heart"></i></div>
 						<div class="itc_rt_name"><?=$product['name_ru']?></div>
-						<div class="itc_rt_cat"><?=product::pr_catalog_name($product['catalog_id'], $lang)?></div>
+						<!-- <div class="itc_rt_cat"><?=product::pr_catalog_name($product['catalog_id'], $lang)?></div> -->
+						<div class="">Артикул: <?=$item_d['article']?></div>
 						<div class="itc_rt_price"><div class="fr_price"><?=$item_d['price']?></div></div>
-						<!-- <div class=""><?=$item_d['article']?></div> -->
-						<div class="itc_rt_rec">
+						<!-- <div class="itc_rt_rec">
 							<div class=""><i class="fal fa-info-circle"></i> Лампочка продается отдельно. Lighterior рекомендует светодиодную лампочку Е26 шарообразный опаловый белый.</div>
-						</div>
+						</div> -->
 					</div>
 
 
@@ -205,10 +209,27 @@
 						</div>
 					<? endif ?>
 
+					<br><br>
+
+					<div class="">
+						<div class="">Как его получить</div>
+						<div class="">
+							<div class="">
+								<div class="">
+									<p>Самовывоз</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="">
+									<p>Доставка</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="itc_o">
 						<div class="btn add_cart" data-id="<?=$item_id?>">Добавить в корзину</div>
 						<!-- <a href="https://api.paybox.money/payment.php?pg_merchant_id=549532&pg_amount=15000&pg_currency=KZT&pg_description=4567&pg_salt=5tLqjUnozyVl5ADC&pg_language=ru&pg_sig=308becc641ac0a2bf756aec2b150546e" class="btn add_cart" data-id="<?=$item_id?>">Добавить в корзину</a> -->
-						<div class="btn btn_dd add_favorites" data-id="<?=$item_d['id']?>"><i class="fal fa-heart"></i></div>
 					</div>
 				</div>
 
